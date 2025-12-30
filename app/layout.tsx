@@ -1,5 +1,5 @@
 import "./globals.css";
-import Providers from "./providers";
+import Header from "@/components/Header";
 
 export default function RootLayout({
   children,
@@ -8,8 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <Providers>{children}</Providers>
+      <body className="bg-black text-white">
+        <Header />
+        <main className="px-6 pt-4">{children}</main>
       </body>
     </html>
   );
