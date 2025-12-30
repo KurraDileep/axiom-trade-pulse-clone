@@ -1,23 +1,11 @@
 import MiniSparkline from "./MiniSparkline";
+import type { TokenInfo } from "../../data/tokenInfo";
 
-type TokenRowProps = {
-  token: {
-    name: string;
-    description: string;
-    time: string;
-    chain: string;
-    marketCap: string;
-    marketChange: number;
-    liquidity: string;
-    volume: string;
-    txns: number;
-    buys: number;
-    sells: number;
-    trend: number[];
-  };
+type Props = {
+  token: TokenInfo;
 };
 
-export default function TokenRow({ token }: TokenRowProps) {
+export default function TokenRow({ token }: Props) {
   const isPositive = token.marketChange >= 0;
 
   return (
@@ -44,13 +32,10 @@ export default function TokenRow({ token }: TokenRowProps) {
         </div>
       </td>
 
-      {/* Sparkline + Market Cap */}
+      {/* Market Cap */}
       <td className="px-4 py-2 align-middle">
         <div className="flex items-center gap-3">
-          <MiniSparkline
-            data={token.trend}
-            positive={isPositive}
-          />
+          <MiniSparkline data={token.trend} positive={isPositive} />
           <div>
             <div className="font-medium">{token.marketCap}</div>
             <div
@@ -66,17 +51,17 @@ export default function TokenRow({ token }: TokenRowProps) {
       </td>
 
       {/* Liquidity */}
-      <td className="px-4 py-2 align-middle text-sm font-medium">
+      <td className="px-4 py-2 align-middle font-medium">
         {token.liquidity}
       </td>
 
       {/* Volume */}
-      <td className="px-4 py-2 align-middle text-sm font-medium">
+      <td className="px-4 py-2 align-middle font-medium">
         {token.volume}
       </td>
 
       {/* TXNS */}
-      <td className="px-4 py-2 align-middle text-sm">
+      <td className="px-4 py-2 align-middle">
         <div className="font-medium">{token.txns}</div>
         <div className="text-xs">
           <span className="text-[var(--green)]">{token.buys}</span>
