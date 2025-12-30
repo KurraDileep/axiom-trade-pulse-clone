@@ -1,36 +1,33 @@
 "use client";
-import TableHeader from "./TableHeader";
+
 import TokenRow from "./TokenRow";
-import { tokenInfo } from "../../data/tokenInfo";
-import { useMockLivePrices } from "../../lib/hooks/useMockLivePrices";
+import { useMockLivePrices } from "@/lib/hooks/useMockLivePrices";
+import { initialTokens } from "@/data/tokenInfo";
 
 export default function TokenTable() {
-  const liveTokens = useMockLivePrices(tokenInfo);
+  const tokens = useMockLivePrices(initialTokens);
 
   return (
-    <div
-      className="
-        bg-black
-        border border-neutral-800
-        rounded-xl
-        overflow-hidden
-      "
-    >
-      {/* sticky header */}
+    <div className="border border-neutral-700 rounded-lg overflow-hidden">
       <table className="w-full text-sm">
-        <TableHeader />
-      </table>
+        <thead className="bg-neutral-900 text-neutral-300">
+          <tr>
+            <th className="px-4 py-3 text-left">Pair Info</th>
+            <th className="px-4 py-3 text-left"></th>
+            <th className="px-4 py-3 text-left">Market Cap</th>
+            <th className="px-4 py-3 text-left">Liquidity</th>
+            <th className="px-4 py-3 text-left">Volume</th>
+            <th className="px-4 py-3 text-left">TXNS</th>
+            <th className="px-4 py-3 text-right">Action</th>
+          </tr>
+        </thead>
 
-      {/* scrollable body */}
-      <div className="max-h-[420px] overflow-y-auto">
-        <table className="w-full text-sm">
-          <tbody>
-            {liveTokens.map((token, i) => (
-              <TokenRow key={i} token={token} />
-            ))}
-          </tbody>
-        </table>
-      </div>
+        <tbody>
+          {tokens.map((token) => (
+            <TokenRow key={token.id} token={token} />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

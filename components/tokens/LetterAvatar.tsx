@@ -1,22 +1,9 @@
-type Props = {
-  name: string;
-};
+export default function LetterAvatar({ name }: { name: string }) {
+  const letter = name.charAt(0).toUpperCase();
 
-export default function LetterAvatar({ name }: Props) {
   return (
-    <div
-      className="
-        w-10 h-10
-        rounded-lg
-        flex items-center justify-center
-        font-semibold
-        text-sm
-        bg-neutral-900
-        border border-neutral-700
-        text-white
-      "
-    >
-      {name.charAt(0).toUpperCase()}
+    <div className="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white font-semibold">
+      {letter}
     </div>
   );
 }

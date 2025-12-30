@@ -1,10 +1,13 @@
+// data/tokenInfo.ts
+
 export type TokenInfo = {
+  id: string;
   name: string;
-  description: string;
   time: string;
   chain: string;
 
-  marketCap: string;
+  marketCapValue: number;
+  marketCapLabel: string;
   marketChange: number;
 
   liquidity: string;
@@ -17,47 +20,53 @@ export type TokenInfo = {
   trend: number[];
 };
 
-export const tokenInfo: TokenInfo[] = [
+/**
+ * ✅ This MUST be exported
+ */
+export const initialTokens: TokenInfo[] = [
   {
+    id: "isadora",
     name: "ISADORA",
-    description: "isadora bui...",
     time: "4m",
     chain: "SOL",
-    marketCap: "$29.7K",
-    marketChange: -30.3,
+    marketCapValue: 31999.57,
+    marketCapLabel: "$31.9K",
+    marketChange: -20.1,
     liquidity: "$16.3K",
     volume: "$40.3K",
     txns: 610,
     buys: 364,
     sells: 246,
-    trend: [8, 6, 7, 5, 6, 4, 5],
+    trend: [10, 14, 9, 18, 22, 19],
   },
   {
+    id: "ftw-3m",
     name: "FTW",
-    description: "Free The Whales",
     time: "3m",
     chain: "SOL",
-    marketCap: "$12.7K",
-    marketChange: 145.4,
+    marketCapValue: 12739.15,
+    marketCapLabel: "$12.7K",
+    marketChange: 144.76,
     liquidity: "$7.0K",
     volume: "$13.2K",
     txns: 226,
     buys: 145,
     sells: 81,
-    trend: [2, 4, 3, 5, 4, 6, 7],
+    trend: [4, 9, 6, 12, 8, 11],
   },
   {
+    id: "ftw-1m",
     name: "FTW",
-    description: "Fuck The Whales",
     time: "1m",
     chain: "SOL",
-    marketCap: "$13.7K",
-    marketChange: 250.7,
+    marketCapValue: 13739.0,
+    marketCapLabel: "$13.7K",
+    marketChange: 250.77,
     liquidity: "$7.5K",
     volume: "$9.2K",
     txns: 149,
     buys: 104,
     sells: 45,
-    trend: [1, 2, 3, 4, 3, 5, 6],
+    trend: [3, 8, 5, 10, 7, 12],
   },
 ];

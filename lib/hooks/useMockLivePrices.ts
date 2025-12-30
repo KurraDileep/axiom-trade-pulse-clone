@@ -1,25 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TokenInfo } from "../../data/tokenInfo";
+import { TokenInfo } from "@/data/tokenInfo";
 
 export function useMockLivePrices(initial: TokenInfo[]) {
-  const [tokens, setTokens] = useState<TokenInfo[]>(initial);
+  const [tokens, setTokens] = useState(initial);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTokens((prev) =>
-        prev.map((token) => {
-          const delta = (Math.random() - 0.5) * 1.5;
+        prev.map((t) => {
+          const delta = (Math.random() - 0.5) * 200;
+          const nextCap = Math.max(1000, t.marketCapValue + delta);
 
           return {
-            ...token,
-            marketChange: +(token.marketChange + delta).toFixed(2),
-            trend: [...token.trend.slice(1), token.trend.at(-1)! + delta],
+            ...t,
+            marketCapValue: nextCap,
+            marketChange:
+              ((nextCap - t.marketCapValue) / t.marketCapValue) * 100,
+            trend: [...t.trend.slice(1), Math.random() * 30],
           };
         })
       );
-    }, 1500);
+    }, 1200);
 
     return () => clearInterval(interval);
   }, []);
