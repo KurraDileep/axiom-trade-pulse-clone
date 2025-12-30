@@ -1,13 +1,23 @@
 export default function TableHeader() {
   return (
-    <div className="h-[44px] px-4 grid grid-cols-[280px_120px_120px_120px_90px_160px_80px] items-center border-b border-border text-[12px] font-medium text-muted tracking-wide">
-      <div>Pair Info</div>
-      <div>Market Cap</div>
-      <div>Liquidity</div>
-      <div>Volume</div>
-      <div>TXNS</div>
-      <div>Token Info</div>
-      <div className="text-right">Action</div>
-    </div>
+    <thead>
+      <tr
+        className="
+          h-[44px]
+          border-b border-[var(--border-subtle)]
+          text-xs
+          uppercase
+          tracking-wide
+          text-[var(--text-secondary)]
+        "
+      >
+        <th className="px-4 text-left font-medium">Pair Info</th>
+        <th className="px-4 text-left font-medium">Market Cap</th>
+        <th className="px-4 text-left font-medium">Liquidity</th>
+        <th className="px-4 text-left font-medium">Volume</th>
+        <th className="px-4 text-left font-medium">TXNS</th>
+        <th className="px-4 text-right font-medium">Action</th>
+      </tr>
+    </thead>
   );
 }
