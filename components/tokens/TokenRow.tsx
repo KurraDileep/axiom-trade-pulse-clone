@@ -1,89 +1,65 @@
 import MiniSparkline from "./MiniSparkline";
-import type { TokenInfo } from "../../data/tokenInfo";
+import LetterAvatar from "./LetterAvatar";
+import { TokenInfo } from "../../data/tokenInfo";
 
-type Props = {
-  token: TokenInfo;
-};
-
-export default function TokenRow({ token }: Props) {
-  const isPositive = token.marketChange >= 0;
+export default function TokenRow({ token }: { token: TokenInfo }) {
+  const positive = token.marketChange >= 0;
 
   return (
-    <tr
-      className="
-        h-[68px]
-        border-b border-[var(--border-subtle)]
-        hover:bg-white/5
-        transition-colors
-      "
-    >
+    <tr className="border-b border-neutral-800 hover:bg-neutral-900">
       {/* Pair Info */}
-      <td className="px-4 py-2 align-middle">
-        <div className="flex flex-col gap-0.5">
-          <div className="font-medium truncate max-w-[220px]">
-            {token.name}{" "}
-            <span className="text-[var(--text-secondary)] font-normal">
-              {token.description}
-            </span>
-          </div>
-          <div className="text-xs text-[var(--text-secondary)]">
-            {token.time} · {token.chain}
+      <td className="px-4 py-3 w-[220px]">
+        <div className="flex items-center gap-3">
+          <LetterAvatar name={token.name} />
+          <div className="min-w-0">
+            <div className="font-medium truncate">{token.name}</div>
+            <div className="text-xs text-neutral-400">
+              {token.time} · {token.chain}
+            </div>
           </div>
         </div>
       </td>
 
       {/* Market Cap */}
-      <td className="px-4 py-2 align-middle">
-        <div className="flex items-center gap-3">
-          <MiniSparkline data={token.trend} positive={isPositive} />
-          <div>
+      <td className="px-4 py-3 w-[260px]">
+        <div className="grid grid-cols-[90px_1fr] items-center gap-3">
+          <MiniSparkline data={token.trend} positive={positive} />
+          <div className="text-right">
             <div className="font-medium">{token.marketCap}</div>
             <div
               className={`text-xs ${
-                isPositive ? "text-[var(--green)]" : "text-[var(--red)]"
+                positive ? "text-green-400" : "text-red-400"
               }`}
             >
-              {isPositive ? "+" : ""}
-              {token.marketChange.toFixed(2)}%
+              {positive ? "+" : ""}
+              {token.marketChange}%
             </div>
           </div>
         </div>
       </td>
 
       {/* Liquidity */}
-      <td className="px-4 py-2 align-middle font-medium">
+      <td className="px-4 py-3 text-center w-[120px]">
         {token.liquidity}
       </td>
 
       {/* Volume */}
-      <td className="px-4 py-2 align-middle font-medium">
+      <td className="px-4 py-3 text-center w-[120px]">
         {token.volume}
       </td>
 
       {/* TXNS */}
-      <td className="px-4 py-2 align-middle">
+      <td className="px-4 py-3 text-center w-[120px]">
         <div className="font-medium">{token.txns}</div>
         <div className="text-xs">
-          <span className="text-[var(--green)]">{token.buys}</span>
-          {" / "}
-          <span className="text-[var(--red)]">{token.sells}</span>
+          <span className="text-green-400">{token.buys}</span> /{" "}
+          <span className="text-red-400">{token.sells}</span>
         </div>
       </td>
 
       {/* Action */}
-      <td className="px-4 py-2 align-middle text-right">
-        <button
-          className="
-            px-4 py-1.5
-            rounded-full
-            bg-white/90
-            text-black
-            text-sm
-            font-medium
-            hover:bg-white
-            transition
-          "
-        >
+      <td className="px-4 py-3 text-right w-[100px]">
+        <button className="px-4 py-1 rounded-full bg-neutral-100 text-black text-sm">
           Buy
         </button>
       </td>
